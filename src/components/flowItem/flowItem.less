@@ -1,0 +1,41 @@
+.z-flow-item {
+    border-radius: 4px;
+    box-shadow: 0 0 2px #696969;
+    cursor: move;
+    overflow: initial;
+    background: #fbf4dc;
+    padding: 0 .5vw;
+    position: absolute;
+    width: 6vw;
+    overflow: hidden;
+
+    .node-con {
+        text-align: center;
+        line-height: 2.3vw;
+        height: 2.3vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        i {
+            font-size: .94vw;
+        }
+
+        span {
+            white-space: nowrap;
+            max-width: 5vw;
+            font-size: .94vw;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
+
+    .node-del {
+        position: absolute;
+        color: red;
+        font-size: .94vw;
+        cursor: pointer;
+        top: 0px;
+        right: 0px;
+    }
+}

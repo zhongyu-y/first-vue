@@ -1,0 +1,150 @@
+.z-form-properties {
+    padding: 10px;
+
+    .layui-row {
+        .layui-item {
+            display: flex;
+            align-items: center;
+            margin-top: 5px;
+            // justify-content: center;
+
+            .el-input-number {
+                line-height: 18px;
+                margin-right: 1vw;
+
+                .el-input {
+                    .el-input__inner {
+                        height: 30px;
+                        line-height: 30px;
+                        font-size: 0.94vw;
+                    }
+                }
+            }
+
+            .icon-delete {
+                height: 30px;
+                width: 30px;
+                background: #ffe9e9;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+
+                .el-icon-delete {
+                    font-size: 1vw;
+                    color: #f22;
+                    font-weight: bold;
+                }
+            }
+
+            .icon-delete:hover {
+                background: #f22;
+
+                .el-icon-delete {
+                    color: #fff;
+                }
+
+            }
+
+            .el-input-number.is-controls-right {
+
+                .el-input-number__decrease,
+                .el-input-number__increase {
+                    line-height: 14px;
+                    width: 30px;
+
+                }
+            }
+        }
+
+        .layui-button {
+            margin-top: 8px;
+            padding-left: 4px;
+            font-size: 0.94vw;
+
+            span {
+                cursor: pointer;
+                color: #13c2c2;
+            }
+        }
+    }
+
+    .form-row {
+        .form-row-title {
+            font-size: 0.94vw;
+        }
+
+        .el-divider--horizontal {
+            margin: 5px 0;
+        }
+
+        .el-form {
+            margin-bottom: 10px;
+
+            .el-form-item {
+                margin-bottom: 5px;
+
+                .el-form-item__label {
+                    padding: 0px;
+                    font-size: 0.94vw;
+                    line-height: initial;
+                    float: none;
+                }
+
+                .el-form-item__content {
+                    line-height: 32px;
+                    font-size: 0.94vw;
+
+                    .el-input {
+                        input {
+                            font-size: 0.94vw;
+                            height: 32px;
+                            line-height: 32px;
+                        }
+                    }
+
+                    .item-rules {
+                        display: flex;
+                        align-items: center;
+
+                        .icon-delete {
+                            height: 30px;
+                            width: 30px;
+                            background: #ffe9e9;
+                            border-radius: 50%;
+                            margin-left: 5px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            cursor: pointer;
+            
+                            .el-icon-delete {
+                                font-size: 1vw;
+                                color: #f22;
+                                font-weight: bold;
+                            }
+                        }
+            
+                        .icon-delete:hover {
+                            background: #f22;
+            
+                            .el-icon-delete {
+                                color: #fff;
+                            }
+                        }
+                    }
+
+                    
+                }                
+            }
+
+            .add-rules {
+                span {
+                    cursor: pointer;
+                    color: #13c2c2;
+                }
+            }
+        }
+    }
+}

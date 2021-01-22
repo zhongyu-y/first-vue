@@ -1,0 +1,84 @@
+.z-form-item {
+    margin: 0px !important;
+    // position: relative;
+
+    .el-form-item__label {
+        font-size: 0.94vw;
+    }
+
+    .el-form-item__content {
+        .el-textarea {
+            textarea {
+                resize: none;
+                cursor: default;
+            }
+        }
+
+        .el-input {
+            input {
+                cursor: default;
+            }
+        }
+
+        .el-input-number {
+            .el-input__inner {
+                text-align: left;
+            }
+        }
+
+        .el-cascader,
+        .el-input-number,
+        .el-date-editor.el-input,
+        .el-select,
+        .el-rate {
+            width: 100%;
+        }
+
+        .el-rate {
+            height: 100%;
+            line-height: inherit;
+
+            .el-rate__item {
+                vertical-align: unset;
+                height: 20px;
+            }
+        }
+
+        .el-upload-list--picture-card {
+            .el-upload-list__item {
+                width: 100px;
+                height: 100px;
+            }
+        }
+
+        .el-upload--picture-card {
+            width: 100px;
+            height: 100px;
+            line-height: 98px;
+        }
+    }
+}
+
+// .z-form-item.action::before {
+//     content: "";
+//     height: 5px;
+//     width: 100%;
+//     background: #13c2c2;
+//     position: absolute;
+//     top: 0;
+//     -webkit-transition: all .3s;
+//     transition: all .3s;
+//     z-index: 1;
+// }
+
+// .z-form-item.action::after {
+//     content: "";
+//     height: 100%;
+//     width: 100%;
+//     background: rgba(19,194,194,.2);
+//     position: absolute;
+//     top: 0;
+//     -webkit-transition: all .3s;
+//     transition: all .3s;
+//     z-index: 1;
+// }

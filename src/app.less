@@ -1,0 +1,64 @@
+@import './comm.less';
+@import './components/conversion.less';
+@import './assets/iconfont/iconfont.less';
+
+.app {
+    background-color: #f0f2f5;
+
+    .container-whole {
+        height: 100vh;
+
+        .aside-menu {
+            width: 200px !important;
+            background-color: #001529;
+
+            .logo {
+                height: 40px;
+                width: 180px;
+                background: rgba(255, 255, 255, 0.2);
+                margin: 10px;
+            }
+        }
+
+        .container-not-menu {
+            width: calc(100vw - 200px);
+
+            .el-header {
+                background-color: #ffffff;
+                color: #333;
+                height: 60px;
+                line-height: 60px;
+            }
+
+            .el-main {
+                padding: 1vw;
+
+                .main-conetnt {
+                    width: calc(98vw - 200px);
+                    height: calc(100vh - 2vw - 60px);
+                    background-color: #ffffff;
+                    overflow: hidden;
+                    overflow-y: auto;
+                }
+
+                .main-conetnt::-webkit-scrollbar {
+                    display: none;
+                }
+
+                .main-conetnt {
+                    scrollbar-width: none;
+                    /*兼容火狐*/
+                    -ms-overflow-style: none;
+                    /* 兼容IE10+ */
+                }
+            }
+        }
+    }
+
+
+    .el-aside {
+        color: #333;
+    }
+}
+
+
