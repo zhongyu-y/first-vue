@@ -1,5 +1,10 @@
 # first-vue
 
+
+```
+git clone https://github.com/zhongyu-y/first-vue.git
+```
+
 ## Project setup
 ```
 npm install
