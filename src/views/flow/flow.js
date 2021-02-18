@@ -10,8 +10,8 @@ const components = {
 
 function data() {
     return {
-        activeName: "flowFrom"
-        // activeName: "flowDraw"
+        // activeName: "flowFrom"
+        activeName: "flowDraw"
     }
 }
 

@@ -1,4 +1,4 @@
-import { menus } from "../config";
+import { menus } from "../../config/config";
 // -- NANE -- 
 const name = "z-menu"
 
@@ -18,7 +18,11 @@ function mounted() {
 // -- METHODS --
 const methods = {
     handleSelect(key, keyPath) {
-        console.log(key, keyPath);
+        let menu = this.menus.find(item => {
+            return item.key == key;
+        });
+        console.log(menu, keyPath);
+        this.$router.push(menu.url)
     },
 };
 

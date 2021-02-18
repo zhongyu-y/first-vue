@@ -2,6 +2,25 @@
     padding: 10px;
 
     .layui-row {
+
+        .row-label-label {
+            padding: 0px;
+            font-size: 0.94vw;
+            line-height: initial;
+            float: none;
+        }
+
+        .row-label-input {
+            width: 65%;
+            margin-top: 5px;
+
+            .el-input__inner {
+                height: 30px;
+                line-height: 30px;
+                font-size: 0.94vw;
+            }
+        }
+
         .layui-item {
             display: flex;
             align-items: center;
@@ -118,25 +137,25 @@
                             align-items: center;
                             justify-content: center;
                             cursor: pointer;
-            
+
                             .el-icon-delete {
                                 font-size: 1vw;
                                 color: #f22;
                                 font-weight: bold;
                             }
                         }
-            
+
                         .icon-delete:hover {
                             background: #f22;
-            
+
                             .el-icon-delete {
                                 color: #fff;
                             }
                         }
                     }
 
-                    
-                }                
+
+                }
             }
 
             .add-rules {

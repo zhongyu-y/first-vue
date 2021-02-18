@@ -1,14 +1,18 @@
 <template>
     <div id="z-form-properties" class="z-form-properties">
         <div class="layui-row" v-if="type == 1 && item != null">
-            <div class="layui-item" v-for="(column, index) in item.columns" :key="index">
+            <div class="row-label-label">数据字段:</div>
+            <el-input v-model="item.label" class="row-label-input"></el-input>
+            <div style="margin-top: 10px"></div>
+            <div class="row-label-label">数据字段:</div>
+            <div class="layui-item" v-for="(column, index) in item.children" :key="index">
                 <el-input-number
                     v-model="column.span"
                     controls-position="right"
                     :min="1"
                     :max="24"
                 ></el-input-number>
-                <div class="icon-delete">
+                <div class="icon-delete" @click="deleteCol">
                     <i class="el-icon-delete"></i>
                 </div>
             </div>
@@ -77,7 +81,7 @@
                 <div class="form-row-title">服务属性</div>
                 <el-divider></el-divider>
                 <el-form-item label="标签" label-position="top">
-                    <el-select v-model="value" placeholder="请选择">
+                    <!-- <el-select v-model="value" placeholder="请选择">
                         <el-option
                             v-for="item in cities"
                             :key="item.value"
@@ -89,7 +93,7 @@
                                 item.value
                             }}</span>
                         </el-option>
-                    </el-select>
+                    </el-select> -->
                 </el-form-item>
             </el-form>
 

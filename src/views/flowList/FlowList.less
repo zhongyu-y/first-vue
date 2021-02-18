@@ -1,0 +1,71 @@
+.flow-list {
+    padding: 2vw;
+
+    .handle {
+        display: flex;
+        margin-bottom: 2vw;
+
+        .add-flow {
+            margin-right: 1vw;
+        }
+
+        .el-form {
+            .el-form-item {
+                margin-bottom: 0px;
+            }
+        }
+    }
+
+    .el-table {
+        table {
+            thead {
+                tr {
+                    th {
+                        background-color: #fafafa;
+                        color: #333333;
+                        font-weight: normal;
+                        text-align: center;
+                    }
+                }
+            }
+
+            tbody {
+                tr {
+                    td {
+                        color: #333333;
+                        font-weight: normal;
+                        text-align: center;
+
+                        .table-search {
+                            cursor: pointer;
+                            transition: color .3s ease;
+                        }
+
+                        .table-search:hover {
+                            color: #1890ff;
+                        }
+
+                        .table-edit {
+                            margin-right: .5vw;
+                            cursor: pointer;
+                            color: #1890ff;
+                            transition: color .3s ease;
+                        }
+
+                        .table-edit:hover {
+                            color: #40a9ff;
+                        }
+                    }
+
+                }
+
+                .el-table__row.hover-row {
+                    td {
+                        background-color: #f1faff;
+                    }
+
+                }
+            }
+        }
+    }
+}

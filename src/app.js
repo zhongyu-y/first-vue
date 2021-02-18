@@ -10,7 +10,7 @@ const components = {
 // -- DATA --
 const data = function () {
     return {
-        
+
     }
 };
 
@@ -20,7 +20,7 @@ function mounted() {
     if (history) {
         let current = history.current
         if (current && current.path && current.path != "/flow") {
-            this.$router.push("/flow")
+            // this.$router.push("/flow")
         }
     }
 }

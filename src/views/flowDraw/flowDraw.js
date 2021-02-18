@@ -1,8 +1,9 @@
 import { jsPlumb } from 'jsplumb';
-import { nodeList } from '../../components/config';
+import { nodeList } from '../../config/config';
 import zFlowItem from '../../components/flowItem/flowItem.vue';
 import zFlowDetail from '../../components/flowDetail/flowDetail.vue';
 import zFlowToolbar from '../../components/flowToolbar/flowToolbar.vue';
+import { flowAdd } from '../../network/api'
 
 // -- COMPONENTS -- 
 const components = {
@@ -131,6 +132,7 @@ function data() {
                     label: "起点",
                     top: "30px",
                     left: "120px",
+                    checkedKeys: [],
                     type: 1,
                 },
                 {
@@ -138,6 +140,7 @@ function data() {
                     label: "终点",
                     top: "480px",
                     left: "120px",
+                    checkedKeys: [],
                     type: 2,
                 },
                 {
@@ -145,6 +148,7 @@ function data() {
                     label: "人工活动",
                     top: "180px",
                     left: "120px",
+                    checkedKeys: [],
                     type: 3,
                 },
                 {
@@ -152,15 +156,9 @@ function data() {
                     label: "自动活动",
                     top: "330px",
                     left: "120px",
+                    checkedKeys: [],
                     type: 4,
-                },
-                {
-                    id: "ff00ede9-0600-4820-ad0c-0ae72db15fa1",
-                    label: "终点",
-                    top: "480px",
-                    left: "360px",
-                    type: 2,
-                },
+                }
             ],
             edgeList: [
                 {
@@ -189,25 +187,7 @@ function data() {
                     label: "",
                     id: "9d7f3831-b417-4724-bc24-e6a67deb4de4",
                     Remark: "",
-                },
-                {
-                    from: "ee0f9f4c-5020-46e2-85a4-da088efc553d",
-                    fromAnchor: [1, 0.5],
-                    toAnchor: [0.5, 0],
-                    to: "ff00ede9-0600-4820-ad0c-0ae72db15fa1",
-                    label: "",
-                    id: "e65a5d7d-cf84-40a4-ab82-ea7c72e21b8e",
-                    Remark: "",
-                },
-                {
-                    from: "ff00ede9-0600-4820-ad0c-0ae72db15fa1",
-                    fromAnchor: [0, 0.5],
-                    toAnchor: [1, 0.5],
-                    to: "de761d10-7590-4590-986a-e4d6fb41895c",
-                    label: "",
-                    id: "abba2fa0-f364-477b-b92c-c5d0f00aa2a0",
-                    Remark: "",
-                },
+                }
             ],
         },
         currentItem: "", //临时存添加的元素
@@ -216,15 +196,54 @@ function data() {
         currentConnect: "", //当前的连接线
         currentEdge: "", //当前连接线数据
         editType: "", //编辑的类型
+
+        submitFromData: null,  // 可提交的表单数据
+        flowFromData: [], // 和流程图绑定的表单数据
     }
 }
 
 function mounted() {
     this.jsPlumb = jsPlumb.getInstance();
+
+    this.initFromData();
     this.init()
 }
 
+
+
 const methods = {
+    initFromData() {
+        const lesf = this;
+        var db = openDatabase('fromdb', '1.0', 'Test DB', 1024 * 1024 * 1024);
+        db.transaction(function (tx) {
+            //查询表单数据
+            var IsDropQLGXRW = 'select text from FORMS where id=1';
+            tx.executeSql(IsDropQLGXRW, [], function (tx, results) {
+
+                // 判断是否查询成功
+                if (results.rows.length > 0) {
+                    var text = results.rows.item(0).text;
+                    if (text != "" && text != null && JSON.parse(text)) {
+                        lesf.submitFromData = JSON.parse(text);
+                        let flowFromData = [];
+                        let jsonText = JSON.parse(text);
+                        for (var i = 0; i < jsonText.length; i++) {
+                            let json = jsonText[i];
+                            let childrens = [];
+                            for (let j = 0; j < json.children.length; j++) {
+                                const children = json.children[j];
+                                childrens = childrens.concat(children.children)
+                            }
+                            json.children = childrens;
+                            flowFromData.push(json)
+                        }
+                        lesf.flowFromData = flowFromData;
+                    }
+                }
+            }, null);
+        })
+    },
+
     init() {
         const _this = this;
         this.jsPlumb.ready(function () {
@@ -238,7 +257,6 @@ const methods = {
             // 单点连接线（编辑label）,
             _this.jsPlumb.bind("click", function (conn) {
                 clearTimeout(this.timer);
-                console.log("click", conn);
                 _this.editEdge(conn);
 
                 // this.timer = setTimeout(function () {
@@ -253,7 +271,6 @@ const methods = {
             // 双击连接线（删除）,
             _this.jsPlumb.bind("dblclick", function (conn) {
                 clearTimeout(this.timer);
-                console.log("dblclick", conn);
 
                 _this
                     .$confirm("确定删除所点击的线吗?", "提示", {
@@ -269,7 +286,7 @@ const methods = {
 
             //连线
             _this.jsPlumb.bind("connection", function (evt) {
-                console.log("connection", evt);
+                // console.log("connection", evt);
                 let from = evt.source.id;
                 let to = evt.target.id;
                 let fromAnchor = [
@@ -358,7 +375,7 @@ const methods = {
             this.jsPlumb.draggable(node.id, {
                 containment: "parent",
             });
-            console.log("----")
+            // console.log("----")
             this.addNodePoint(node.id);
         }
 
@@ -495,7 +512,7 @@ const methods = {
 
     // 编辑连线
     editEdge(conn) {
-        console.log(conn)
+        // console.log(conn)
         this.editType = "edge";
         this.currentConnect = conn;
         this.$nextTick(function () {
@@ -532,7 +549,7 @@ const methods = {
     },
     // 刷新线的label
     edgeLabelSave(edge) {
-        console.log(this.currentConnect)
+        // console.log(this.currentConnect)
         this.currentConnect.getOverlay("label").setLabel(edge.label);
     },
     drag(item) {
@@ -574,6 +591,12 @@ const methods = {
         console.log("线", this.jsPlumb.getConnections());
         console.log(this.data);
         console.log(JSON.stringify(this.data));
+        flowAdd({
+            name: "测试流程",
+            userCode: "1001",
+            formData: JSON.stringify(this.submitFromData),
+            flowData: JSON.stringify(this.data),
+        })
     },
 }
 // components

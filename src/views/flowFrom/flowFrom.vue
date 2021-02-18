@@ -5,11 +5,20 @@
             <el-col :span="6" class="el-col-left">
                 <div class="grid-content left">
                     <el-collapse v-model="activeCollapse">
-                        <el-collapse-item :title="item.title" :name="item.key" v-for="(item, index) in fromControls" :key="index">
+                        <el-collapse-item
+                            :title="item.title"
+                            :name="item.key"
+                            v-for="(item, index) in fromControls"
+                            :key="index"
+                        >
                             <draggable
                                 class="list-group"
                                 :list="item.children"
-                                :group="{ name: 'layoutItem', pull: 'clone', put: false }"
+                                :group="{
+                                    name: item.copyName,
+                                    pull: 'clone',
+                                    put: false,
+                                }"
                                 :clone="cloneDog"
                                 @change="log"
                             >
@@ -63,29 +72,48 @@
                             group="layoutItem"
                             @change="log"
                         >
+                            <template></template>
                             <el-row
                                 v-for="(item, i) in datas"
                                 class="grid-row"
                                 :key="i"
+                                :id="item.key"
+                                :class="{
+                                    action:
+                                        selectItem != null && selectItem.key == item.key,
+                                }"
                             >
                                 <el-col
-                                    v-for="(column, j) in item.columns"
+                                    v-for="(column, j) in item.children"
                                     :span="column.span"
                                     :key="j"
                                     class="grid-col"
+                                    :style="{ height: item.height + 'px' }"
                                 >
-                                    <div @click="colClick($event, item)">
+                                    <div
+                                        style="height: 100%"
+                                        @click="colClick($event, item)"
+                                    >
                                         <draggable
                                             class="list-group"
-                                            :list="column.list"
+                                            :list="column.children"
                                             group="fromItem"
                                             @change="log"
+                                            @remove="fromRemove(item.key)"
+                                            @add="fromAdd(item.key)"
                                         >
                                             <div
-                                                v-for="(list, k) in column.list"
+                                                v-for="(list, k) in column.children"
                                                 :key="k"
                                                 @click="formItemClick($event, list)"
                                                 class="item-group"
+                                                :id="list.key"
+                                                :style="{
+                                                    height:
+                                                        list.key.indexOf('text_') != -1
+                                                            ? `calc(100% / ${column.children.length} - 10px)`
+                                                            : 'auto',
+                                                }"
                                                 :class="{
                                                     action:
                                                         selectItem != null &&
@@ -93,10 +121,20 @@
                                                 }"
                                             >
                                                 <z-form-item :record="list"></z-form-item>
+
+                                                <div class="item-delete">
+                                                    <i
+                                                        class="el-icon-delete"
+                                                        @click="itemDelete(i, j, k)"
+                                                    ></i>
+                                                </div>
                                             </div>
                                         </draggable>
                                     </div>
                                 </el-col>
+                                <div class="row-delete">
+                                    <i class="el-icon-delete" @click="rowDelete(i)"></i>
+                                </div>
                             </el-row>
                         </draggable>
                     </el-form>
@@ -105,10 +143,9 @@
             <el-col :span="6" class="el-col-right">
                 <div class="grid-content right">
                     <z-form-properties
-                        :type="selectIndex"
+                        :type="selectType"
                         :item="selectItem"
                         :data="datas"
-                        @addRow="addDatas"
                     ></z-form-properties>
                 </div>
             </el-col>
@@ -117,5 +154,4 @@
 </template>
 
 <script src="./flowFrom.js"></script>
-
 <style lang="less" src="./flowFrom.less"></style>

@@ -184,6 +184,19 @@
             :filterable="record.options.filterable"
         ></el-cascader>
     </el-form-item>
+
+    <!-- 文本 start-->
+    <el-form-item class="z-form-item z-form-item-text"
+         v-else-if="!(record.options.hidden === true) && record.type === 'text'">
+        <div :style="{ height: '100%', display: 'flex',  alignItems: record.options.alignItems,
+    justifyContent: record.options.justifyContent }">
+            <label
+                :class="{ 'ant-form-item-required': record.options.showRequiredMark }"
+                v-text="record.label"
+            ></label>
+        </div>
+    </el-form-item>
+    <!-- /文本 end-->
 </template>
 
 <script src="./formItem.js"></script>

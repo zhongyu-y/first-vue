@@ -21,6 +21,7 @@
                 </div>
             </el-col>
             <el-col :span="15" class="el-col-middle">
+                <button @click="saveData">保存</button>
                 <div class="grid-content middle">
                     <div
                         id="flowContent"
@@ -45,7 +46,11 @@
             </el-col>
             <el-col :span="5" class="el-col-right">
                 <div class="grid-content right">
-                    <z-flow-detail ref="flowDrawForm" @line-save="edgeLabelSave"></z-flow-detail>
+                    <z-flow-detail
+                        ref="flowDrawForm"
+                        @line-save="edgeLabelSave"
+                        :flowFromData="flowFromData"
+                    ></z-flow-detail>
                 </div>
             </el-col>
         </el-row>
