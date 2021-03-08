@@ -4,7 +4,7 @@ const props = {
         default: 0
     },
     item: {
-        type: Object,
+        type: Object | Array,
     },
     data: {
         type: Array,
@@ -46,30 +46,18 @@ const methods = {
      * 添加栅格，且这个栅格总和不大于24
      */
     addCol() {
-        if (this.item) {
-            const children = this.item.children; // 栅格组
-            let span = 0; // 当前栅格总和
-            let maxSpan = 24; // 最大栅格数
-            for (let i = 0; i < children.length; i++) {
-                const column = children[i];
-                span += Number(column.span);
-            }
-            if (span >= maxSpan) {
-                // 当前栅格总和 大于等于 最大栅格数时不允许添加栅格
-                return false
-            } else {
-                let col = {
-                    list: [],
-                    span: maxSpan - span
-                }
-                this.item.children.push(col)
-            }
-        }
+        // 唯一值(时间戳)
+        let time = new Date().getTime()
+        this.item.push({
+            "span": 24,
+            "children": [],
+            "key": `col_${time}`,
+        })
     },
 
     deleteCol(index) {
         if (this.item) {
-            this.item.children.splice(index, 1)
+            this.item.splice(index, 1)
         }
     }
 }

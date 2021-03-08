@@ -66,77 +66,70 @@
                     </div>
 
                     <el-form ref="form" label-width="80px">
-                        <draggable
-                            class="layout-group"
-                            :list="datas"
-                            group="layoutItem"
-                            @change="log"
+                        <el-row
+                            class="grid-row"
+                            :class="{
+                                action: selectType == 1,
+                            }"
                         >
-                            <template></template>
-                            <el-row
+                            <el-col
                                 v-for="(item, i) in datas"
-                                class="grid-row"
+                                :span="item.span"
                                 :key="i"
-                                :id="item.key"
-                                :class="{
-                                    action:
-                                        selectItem != null && selectItem.key == item.key,
-                                }"
+                                class="grid-col"
                             >
-                                <el-col
-                                    v-for="(column, j) in item.children"
-                                    :span="column.span"
-                                    :key="j"
-                                    class="grid-col"
-                                    :style="{ height: item.height + 'px' }"
+                                <div
+                                    style="height: 100%"
+                                    @click="colClick($event, datas)"
                                 >
-                                    <div
-                                        style="height: 100%"
-                                        @click="colClick($event, item)"
+                                    <draggable
+                                        class="list-group"
+                                        :list="item.children"
+                                        group="fromItem"
+                                        @change="log"
+                                        @remove="fromRemove(item.key)"
+                                        @add="fromAdd(item.key)"
                                     >
-                                        <draggable
-                                            class="list-group"
-                                            :list="column.children"
-                                            group="fromItem"
-                                            @change="log"
-                                            @remove="fromRemove(item.key)"
-                                            @add="fromAdd(item.key)"
+                                        <div
+                                            v-for="(list, j) in item.children"
+                                            :key="j"
+                                            @click="formItemClick($event, list)"
+                                            class="item-group"
+                                            :id="list.key"
+                                            :class="{
+                                                action:
+                                                    selectItem != null &&
+                                                    selectItem.key == list.key,
+                                            }"
+                                            :style="{
+                                                height:
+                                                    list.key.indexOf('text_') != -1
+                                                        ? `calc(100% / ${item.children.length} - 10px)`
+                                                        : 'auto',
+                                            }"
                                         >
-                                            <div
-                                                v-for="(list, k) in column.children"
-                                                :key="k"
-                                                @click="formItemClick($event, list)"
-                                                class="item-group"
-                                                :id="list.key"
-                                                :style="{
-                                                    height:
-                                                        list.key.indexOf('text_') != -1
-                                                            ? `calc(100% / ${column.children.length} - 10px)`
-                                                            : 'auto',
-                                                }"
-                                                :class="{
-                                                    action:
-                                                        selectItem != null &&
-                                                        selectItem.key == list.key,
-                                                }"
-                                            >
-                                                <z-form-item :record="list"></z-form-item>
+                                            <!-- :style="{
+                                                height:
+                                                    list.key.indexOf('text_') != -1
+                                                        ? `calc(100% / ${item.children.length} - 10px)`
+                                                        : 'auto',
+                                            }" -->
+                                            <z-form-item :record="list"></z-form-item>
 
-                                                <div class="item-delete">
-                                                    <i
-                                                        class="el-icon-delete"
-                                                        @click="itemDelete(i, j, k)"
-                                                    ></i>
-                                                </div>
+                                            <div class="item-delete">
+                                                <i
+                                                    class="el-icon-delete"
+                                                    @click="itemDelete(i, j)"
+                                                ></i>
                                             </div>
-                                        </draggable>
-                                    </div>
-                                </el-col>
-                                <div class="row-delete">
-                                    <i class="el-icon-delete" @click="rowDelete(i)"></i>
+                                        </div>
+                                    </draggable>
                                 </div>
-                            </el-row>
-                        </draggable>
+                            </el-col>
+                            <!-- <div class="row-delete">
+                                <i class="el-icon-delete" @click="rowDelete(i)"></i>
+                            </div> -->
+                        </el-row>
                     </el-form>
                 </div>
             </el-col>

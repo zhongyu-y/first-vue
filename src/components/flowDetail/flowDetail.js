@@ -44,6 +44,7 @@ const methods = {
             setTimeout(() => {
                 self.isNodeShow = true;
             }, 1)
+            console.log(this.flowFromData)
         } else if (type === "edge") {
             data.edgeList.filter((item) => {
                 if (item.from === selData.sourceId && item.to === selData.targetId) {

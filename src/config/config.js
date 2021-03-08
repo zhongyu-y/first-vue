@@ -6,6 +6,12 @@ export const menus = [
         title: "创建列表",
         url: "/flow/list",
         children: []
+    },
+    {
+        key: "2",
+        title: "富文本",
+        url: "/rich/text",
+        children: []
     }
 ]
 
@@ -50,32 +56,6 @@ export const nodeList = [
 
 // 自定义表单控件
 export const fromControls = [
-    {
-        key: 1,
-        title: "布局控件",
-        copyName: "layoutItem",
-        height: 64,
-        children: [
-            {
-                "icon": "&#xe622;",
-                "type": "grid",
-                "label": "栅格布局",
-                "children": [
-                    {
-                        "span": 12,
-                        "children": []
-                    },
-                    {
-                        "span": 12,
-                        "children": []
-                    }
-                ],
-                "options": {
-                    "gutter": 0
-                }
-            }
-        ]
-    },
     {
         key: 2,
         title: "基础组件",

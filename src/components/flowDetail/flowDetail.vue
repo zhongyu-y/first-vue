@@ -23,15 +23,7 @@
             <el-form-item label="对应表单:">
                 <template v-for="(ffdItem, i) in flowFromData">
                     <div :key="i" class="flow-from">
-                        <div
-                            v-if="
-                                i == 0 ||
-                                (i > 0 && flowFromData[i - 1].label != ffdItem.label)
-                            "
-                            class="flow-from-label"
-                        >
-                            {{ ffdItem.label }}
-                        </div>
+                        <div class="flow-from-label"></div>
                         <el-checkbox-group
                             v-model="node.checkedKeys"
                             @change="handleCheckedCitiesChange"
@@ -50,7 +42,7 @@
                                     hadleCheckboxChange(ffdItem, children.key, $event)
                                 "
                             >
-                                {{ children.label }}
+                                {{ children.label != null ? children.label : "全选" }}
                             </el-checkbox>
                         </el-checkbox-group>
                     </div>

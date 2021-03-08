@@ -1,11 +1,11 @@
 <template>
     <div id="z-form-properties" class="z-form-properties">
-        <div class="layui-row" v-if="type == 1 && item != null">
+        <div class="layui-row" v-if="type == 1">
+            <!-- <div class="row-label-label">数据字段:</div>
+            <el-input v-model="item.label" class="row-label-input"></el-input> -->
+            <!-- <div style="margin-top: 10px"></div> -->
             <div class="row-label-label">数据字段:</div>
-            <el-input v-model="item.label" class="row-label-input"></el-input>
-            <div style="margin-top: 10px"></div>
-            <div class="row-label-label">数据字段:</div>
-            <div class="layui-item" v-for="(column, index) in item.children" :key="index">
+            <div class="layui-item" v-for="(column, index) in item" :key="index">
                 <el-input-number
                     v-model="column.span"
                     controls-position="right"

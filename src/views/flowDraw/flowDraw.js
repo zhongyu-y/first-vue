@@ -225,19 +225,20 @@ const methods = {
                     var text = results.rows.item(0).text;
                     if (text != "" && text != null && JSON.parse(text)) {
                         lesf.submitFromData = JSON.parse(text);
-                        let flowFromData = [];
+                        // let flowFromData = [];
                         let jsonText = JSON.parse(text);
-                        for (var i = 0; i < jsonText.length; i++) {
-                            let json = jsonText[i];
-                            let childrens = [];
-                            for (let j = 0; j < json.children.length; j++) {
-                                const children = json.children[j];
-                                childrens = childrens.concat(children.children)
-                            }
-                            json.children = childrens;
-                            flowFromData.push(json)
-                        }
-                        lesf.flowFromData = flowFromData;
+                        console.log(jsonText)
+                        // for (var i = 0; i < jsonText.length; i++) {
+                        //     let json = jsonText[i];
+                        //     let childrens = [];
+                        //     for (let j = 0; j < json.children.length; j++) {
+                        //         const children = json.children[j];
+                        //         childrens = childrens.concat(children.children)
+                        //     }
+                        //     json.children = childrens;
+                        //     flowFromData.push(json)
+                        // }
+                        lesf.flowFromData = jsonText;
                     }
                 }
             }, null);

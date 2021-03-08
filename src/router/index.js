@@ -1,7 +1,8 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Flow from '../views/flow/flow.vue'
-import FlowList from '../views/flowList/FlowList.vue'
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import Flow from '../views/flow/flow.vue';
+import FlowList from '../views/flowList/FlowList.vue';
+import RichText from '../views/richText/richText.vue';
 
 Vue.use(VueRouter)
 
@@ -25,6 +26,11 @@ const routes = [
         path: '/create/flow/:id',
         name: 'CreateFlow',
         component: Flow
+    },
+    {
+        path: '/rich/text',
+        name: 'RichText',
+        component: RichText
     }
 ]
 

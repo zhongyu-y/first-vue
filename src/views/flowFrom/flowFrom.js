@@ -22,7 +22,13 @@ function data() {
 
 function mounted() {
     console.log(this.$router)
-
+    let time = new Date().getTime()
+    // 给item添加上唯一值(时间戳)
+    this.datas.push(
+        {
+            "span": 24, "children": [], "key": `col_${time}`,
+        }
+    )
     this._initFrom();
 }
 
@@ -77,23 +83,24 @@ const methods = {
      * 通过选择的row的获取高重新计算出col的高
      */
     colHeight(key) {
-        let row = document.getElementById(key);
-        for (let i = 0; i < row.children.length; i++) {
-            const children = row.children[i];
-            children.style.height = "auto"
-        }
+        console.log(key)
+        // let row = document.getElementById(key);
+        // for (let i = 0; i < row.children.length; i++) {
+        //     const children = row.children[i];
+        //     children.style.height = "auto"
+        // }
 
-        let datas = JSON.parse(JSON.stringify(this.datas))
-        // console.log(row)
-        let offsetHeight = row.offsetHeight;
-        let index = datas.findIndex((data) => {
-            return data.key == row.id;
-        })
-        if (Number(offsetHeight) < 64) {
-            offsetHeight = 64;
-        }
-        datas[index]["height"] = offsetHeight;
-        this.datas = datas
+        // let datas = JSON.parse(JSON.stringify(this.datas))
+        // // console.log(row)
+        // let offsetHeight = row.offsetHeight;
+        // let index = datas.findIndex((data) => {
+        //     return data.key == row.id;
+        // })
+        // if (Number(offsetHeight) < 64) {
+        //     offsetHeight = 64;
+        // }
+        // datas[index]["height"] = offsetHeight;
+        // this.datas = datas
     },
 
     cloneDog(item) {
@@ -158,17 +165,18 @@ const methods = {
         })
     },
 
-    itemDelete(i, j, k) {
+    itemDelete(i, j) {
+        // console.log(i, j, k)
         let datas = JSON.parse(JSON.stringify(this.datas))
-        let list = datas[i].children[j].children;
-        list.splice(k, 1)
-        datas[i].children[j].children = list;
+        let list = datas[i].children;
+        list.splice(j, 1)
+        datas[i].children = list;
 
         this.datas = datas;
-        const self = this;
-        setTimeout(function () {
-            self.colHeight(datas[i].key)
-        }, 100)
+        // const self = this;
+        // setTimeout(function () {
+        //     self.colHeight(datas[i].key)
+        // }, 100)
     },
 
     rowDelete(i) {

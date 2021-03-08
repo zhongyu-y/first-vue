@@ -87,6 +87,7 @@ export default class FetchHttp {
         const context = {
             method: 'GET'
         };
+        console.log(getUrl(path, params))
         return this.fetchData(getUrl(path, params), context, loginTokneType);
     }
 
