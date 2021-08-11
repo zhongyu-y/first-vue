@@ -1,41 +1,29 @@
+/*
+ * @Description: 
+ * @Autor: Zhongyu
+ * @Date: 2021-03-08 15:46:29
+ * @LastEditors: Zhongyu
+ * @LastEditTime: 2021-08-11 14:28:08
+ */
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Flow from '../views/flow/flow.vue';
-import FlowList from '../views/flowList/FlowList.vue';
-import RichText from '../views/richText/richText.vue';
-
 Vue.use(VueRouter)
 
 const routes = [
     {
-        path: '/',
-        name: 'Home',
-        component: FlowList
-    },
-    {
-        path: '/flow',
-        name: 'Flow',
-        component: Flow
-    },
-    {
-        path: '/flow/list',
+        path: '/flow-list',
         name: 'FlowList',
-        component: FlowList
+        component: () => import("../views/flowList")
     },
     {
-        path: '/create/flow/:id',
+        path: '/flow/endit',
         name: 'CreateFlow',
-        component: Flow
-    },
-    {
-        path: '/rich/text',
-        name: 'RichText',
-        component: RichText
+        component: () => import("../views/flow")
     }
 ]
 
 const router = new VueRouter({
-    mode: 'history',
+    // mode: 'history',
     base: process.env.BASE_URL,
     routes
 })

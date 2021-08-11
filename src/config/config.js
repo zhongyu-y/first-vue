@@ -4,13 +4,7 @@ export const menus = [
     {
         key: "1",
         title: "创建列表",
-        url: "/flow/list",
-        children: []
-    },
-    {
-        key: "2",
-        title: "富文本",
-        url: "/rich/text",
+        url: "flow-list",
         children: []
     }
 ]
@@ -471,69 +465,6 @@ export const fromControls = [
                 },
             },
             {
-                "type": "editor",
-                "label": "富文本",
-                "icon": "&#xe608;",
-                "list": [],
-                "options": {
-                    "height": 300,
-                    "placeholder": "请输入",
-                    "defaultValue": "",
-                    "chinesization": true,
-                    "hidden": false,
-                    "disabled": false,
-                    "showLabel": false,
-                    "width": "100%"
-                },
-                "rules": [
-                    {
-                        "required": false,
-                        "message": "必填项"
-                    }
-                ]
-            },
-            {
-                "type": "switch",
-                "label": "开关",
-                "icon": "&#xe619;",
-                "options": {
-                    "defaultValue": false,
-                    "hidden": false,
-                    "disabled": false
-                },
-                "rules": [
-                    {
-                        "required": false,
-                        "message": "必填项"
-                    }
-                ]
-            },
-            {
-                "type": "button",
-                "label": "按钮",
-                "icon": "&#xe602;",
-                "options": {
-                    "type": "primary",
-                    "handle": "submit",
-                    "dynamicFun": "",
-                    "hidden": false,
-                    "disabled": false
-                },
-            },
-            {
-                "type": "alert",
-                "label": "警告提示",
-                "icon": "&#xe621;",
-                "options": {
-                    "type": "success",
-                    "description": "",
-                    "showIcon": false,
-                    "banner": false,
-                    "hidden": false,
-                    "closable": false
-                },
-            },
-            {
                 "type": "text",
                 "label": "文字",
                 "icon": "&#xe61d;",
@@ -543,15 +474,6 @@ export const fromControls = [
                     "justifyContent": "center",
                     "hidden": false,
                     "showRequiredMark": false
-                },
-            },
-            {
-                "type": "html",
-                "label": "HTML",
-                "icon": "&#xe604;",
-                "options": {
-                    "hidden": false,
-                    "defaultValue": "<strong>HTML</strong>"
                 },
             }
         ]

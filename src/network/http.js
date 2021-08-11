@@ -43,6 +43,7 @@ export default class FetchHttp {
         let myHeaders = {
             'Content-Type': 'application/json;charset=UTF-8',
         }
+        console.log(url, context)
         // let loginType = this.loginTokenType()
         // if (loginToken === loginType.getLogin) {
         //     myHeaders = {
@@ -98,6 +99,6 @@ export default class FetchHttp {
         if (params != null) {
             context.body = JSON.stringify(params);
         }
-        return this.fetchData(getUrl(path, params), context, loginTokneType);
+        return this.fetchData(getUrl(path), context, loginTokneType);
     }
 }
